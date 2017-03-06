@@ -10,5 +10,14 @@
       <user-name>postgres</user-name>
       <resolve-scope>academ:postgres,public</resolve-scope>
     </data-source>
+    <data-source name="students@localhost" uuid="85c09eeb-beb7-4dbd-88a6-0fc709013688">
+      <database-info product="PostgreSQL" version="9.6.1" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+      <resolve-scope>postgres:postgres,public</resolve-scope>
+    </data-source>
   </component>
 </project>

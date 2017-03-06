@@ -19,10 +19,18 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Gradle: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Gradle: javax.servlet:javax.servlet-api:3.0.1" />
-          <element id="library" level="project" name="Gradle: jstl:jstl:1.2" />
           <element id="library" level="project" name="Gradle: postgresql:postgresql:9.0-801.jdbc4" />
-          <element id="file-copy" path="$USER_HOME$/pf/gradle-3.3/caches/modules-2/files-2.1/javax.mail/mail/1.4/1aa1579ae5ecd41920c4f355b0a9ef40b68315dd/mail-1.4.jar" />
-          <element id="file-copy" path="$USER_HOME$/pf/gradle-3.3/caches/modules-2/files-2.1/javax.activation/activation/1.1/e6cb541461c2834bdea3eb920f1884d1eb508b50/activation-1.1.jar" />
+          <element id="library" level="project" name="Gradle: javax.mail:mail:1.4" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.3.5.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.3.5.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:4.3.5.RELEASE" />
+          <element id="library" level="project" name="Gradle: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-aop:4.3.5.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-beans:4.3.5.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.3.5.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.3.5.RELEASE" />
+          <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.servlet/jstl/1.2/74aca283cd4f4b4f3e425f5820cda58f44409547/jstl-1.2.jar" />
         </element>
       </element>
     </root>

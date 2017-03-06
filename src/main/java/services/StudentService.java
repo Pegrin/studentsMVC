@@ -2,35 +2,44 @@ package services;
 
 import models.dao.StudentDao;
 import models.pojo.Student;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by smoldyrev on 23.02.17.
  */
+@Service
 public class StudentService {
+    StudentDao studentDao;
 
-    public static List<Student> getAllStudents(){
-        return StudentDao.getAllStudents();
+    @Autowired
+    public void setStudentDao(StudentDao studentDao) {
+        this.studentDao = studentDao;
     }
 
-    public static int deleteStudentOnId(int id){
-
-        return StudentDao.deleteStudent(id);
+    public List<Student> getAllStudents(){
+        return studentDao.getAllStudents();
     }
 
-    public static int updateStudentOnId(Student student){
+    public int deleteStudentOnId(int id){
 
-        return StudentDao.updateStudent(student);
+        return studentDao.deleteStudent(id);
     }
 
-    public static int insertStudent(Student student){
+    public int updateStudentOnId(Student student){
 
-        return StudentDao.insertStudent(student);
+        return studentDao.updateStudent(student);
     }
 
-    public static List<Student> getStudentsByGroupId(int groupid){
-        return StudentDao.getStudentsByGroup(groupid);
+    public int insertStudent(Student student){
+
+        return studentDao.insertStudent(student);
+    }
+
+    public List<Student> getStudentsByGroupId(int groupid){
+        return studentDao.getStudentsByGroup(groupid);
     }
 
 }

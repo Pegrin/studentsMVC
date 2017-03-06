@@ -6,10 +6,16 @@ import models.dao.StudentDao;
 import models.pojo.Lection;
 import models.pojo.Student;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import services.LectionService;
 import services.StudentService;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +25,21 @@ import java.sql.Date;
 /**
  * Created by smoldyrev on 24.02.17.
  */
+@WebServlet("/addLection")
+@Controller
 public class AddLectionServlet extends HttpServlet {
+    private LectionDAO lectionDAO;
+    private LectionService lectionService;
+
+    @Autowired
+    public void setLectionService(LectionService lectionService) {
+        this.lectionService = lectionService;
+    }
+
+    @Autowired
+    public void setLectionDAO(LectionDAO lectionDAO) {
+        this.lectionDAO = lectionDAO;
+    }
 
     private static Logger logger = Logger.getLogger(AddLectionServlet.class);
 
@@ -32,7 +52,7 @@ public class AddLectionServlet extends HttpServlet {
         Lection lection = new Lection();
         if (id != 0) {
             try {
-                lection = LectionDAO.getLectionById(id);
+                lection = lectionDAO.getLectionById(id);
             } catch (UserDAOException e) {
                 e.printStackTrace();
             }
@@ -64,9 +84,9 @@ public class AddLectionServlet extends HttpServlet {
         lection.setGroupid(Integer.parseInt(req.getParameter("groupid")));
         int count = 0;
         if (id == 0) {
-            count = LectionService.insertLection(lection);
+            count = lectionService.insertLection(lection);
         } else {
-            count = LectionService.updateLectionOnId(lection);
+            count = lectionService.updateLectionOnId(lection);
         }
         if (count != 0) {
             logger.trace("true");
@@ -76,5 +96,9 @@ public class AddLectionServlet extends HttpServlet {
             req.getRequestDispatcher("/error.jsp").forward(req, resp);
 
         }
+    }
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
 }

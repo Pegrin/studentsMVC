@@ -4,6 +4,7 @@ import common.exceptions.UserDAOException;
 import models.connector.AcademConnector;
 import models.pojo.Lection;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,29 +13,29 @@ import java.util.List;
 /**
  * Created by smoldyrev on 24.02.17.
  */
-
+@Repository
 public class LectionDAO {
 
-    private static String SQL_ALL_LECTIONS = "SELECT * FROM \"Main\".\"Lection\"";
+    private String SQL_ALL_LECTIONS = "SELECT * FROM \"Main\".\"Lection\"";
 
-    private static String SQL_NEARED_LECTIONS = "SELECT * FROM \"Main\".\"Lection\" WHERE date >? AND date <?";
+    private String SQL_NEARED_LECTIONS = "SELECT * FROM \"Main\".\"Lection\" WHERE date >? AND date <?";
 
-    private static String SQL_DELETE_LECTION = "DELETE FROM \"Main\".\"Lection\" WHERE id = ?";
+    private String SQL_DELETE_LECTION = "DELETE FROM \"Main\".\"Lection\" WHERE id = ?";
 
-    private static String SQL_UPDATE_LECTION = "UPDATE \"Main\".\"Lection\"\n" +
+    private String SQL_UPDATE_LECTION = "UPDATE \"Main\".\"Lection\"\n" +
             "\tSET id=?, name=?, subject=?, date=?, groupid=?, textlection=?" +
             "\tWHERE id=?";
 
-    private static String SQL_INSERT_LECTION = "INSERT INTO \"Main\".\"Lection\"(\n" +
+    private String SQL_INSERT_LECTION = "INSERT INTO \"Main\".\"Lection\"(\n" +
             "\t name, subject, date, groupid, textlection)\n" +
             "\tVALUES (?, ?, ?, ?,?);";
 
-    private static String SQL_FIND_LECTION = "SELECT * FROM \"Main\".\"Lection\" WHERE id =?";
+    private String SQL_FIND_LECTION = "SELECT * FROM \"Main\".\"Lection\" WHERE id =?";
 
 
     private static Logger logger = Logger.getLogger(LectionDAO.class);
 
-    public static List<Lection> getAllLections(){
+    public List<Lection> getAllLections(){
         List<Lection> lections = new ArrayList<>();
         try(Connection connection = AcademConnector.getConnection()){
             Statement statement = connection.createStatement();
@@ -59,7 +60,7 @@ public class LectionDAO {
         return lections;
     }
 
-    public static int deleteLection(int id) {
+    public int deleteLection(int id) {
         int count = 0;
         try(Connection connection = AcademConnector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_LECTION)) {
@@ -73,7 +74,7 @@ public class LectionDAO {
         return count;
     }
 
-    public static int updateLection(Lection lection){
+    public int updateLection(Lection lection){
 
         int count = 0;
         try(Connection connection = AcademConnector.getConnection();
@@ -95,7 +96,7 @@ public class LectionDAO {
         return count;
     }
 
-    public static int insertLection(Lection lection){
+    public int insertLection(Lection lection){
 
         int count = 0;
         try(Connection connection = AcademConnector.getConnection();
@@ -115,7 +116,7 @@ public class LectionDAO {
         return count;
     }
 
-    public static Lection getLectionById(int id) throws UserDAOException {
+    public Lection getLectionById(int id) throws UserDAOException {
 
         logger.debug(id);
         Lection lection = null;
@@ -142,7 +143,7 @@ public class LectionDAO {
         return lection;
     }
 
-    public static List<Lection> getNearedLections(){
+    public List<Lection> getNearedLections(){
         List<Lection> lections = new ArrayList<>();
         try(Connection connection = AcademConnector.getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_NEARED_LECTIONS);

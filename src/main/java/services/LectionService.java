@@ -4,34 +4,44 @@ import models.dao.LectionDAO;
 import models.dao.StudentDao;
 import models.pojo.Lection;
 import models.pojo.Student;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by smoldyrev on 24.02.17.
  */
+@Service
 public class LectionService {
+    private LectionDAO lectionDAO;
 
-    public static List<Lection> getAllLections(){
-        return LectionDAO.getAllLections();
+    @Autowired
+    public void setLectionDAO(LectionDAO lectionDAO) {
+        this.lectionDAO = lectionDAO;
     }
 
-    public static int deleteLectioOnId(int id){
-
-        return LectionDAO.deleteLection(id);
+    public List<Lection> getAllLections(){
+        return lectionDAO.getAllLections();
     }
 
-    public static int updateLectionOnId(Lection lection){
+    public int deleteLectioOnId(int id){
 
-        return LectionDAO.updateLection(lection);
+        return lectionDAO.deleteLection(id);
     }
 
-    public static int insertLection(Lection lection){
+    public int updateLectionOnId(Lection lection){
 
-        return LectionDAO.insertLection(lection);
+        return lectionDAO.updateLection(lection);
     }
 
-    public static List<Lection> getNearedLection() {
-        return LectionDAO.getNearedLections();
+    public int insertLection(Lection lection){
+
+        return lectionDAO.insertLection(lection);
+    }
+
+    public  List<Lection> getNearedLection() {
+        return lectionDAO.getNearedLections();
     }
 }

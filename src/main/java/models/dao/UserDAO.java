@@ -4,6 +4,8 @@ import common.exceptions.UserDAOException;
 import models.connector.AcademConnector;
 import models.pojo.User;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +15,7 @@ import java.sql.SQLException;
 /**
  * Created by smoldyrev on 23.02.17.
  */
+@Repository
 public class UserDAO {
 
     private static Logger logger = Logger.getLogger(UserDAO.class);
@@ -24,7 +27,7 @@ public class UserDAO {
     private static final String SQL_USER_ID = "SELECT * FROM \"Main\".\"User\"\n" +
             "WHERE id = ?";
 
-    public static User getUserByLoginAndPassword(String login, String password) throws UserDAOException {
+    public User getUserByLoginAndPassword(String login, String password) throws UserDAOException {
 
         logger.debug(login + " " + password);
         User user = null;
@@ -52,7 +55,7 @@ public class UserDAO {
         return user;
     }
 
-    public static boolean registrationUser(String login, String password, String email) throws UserDAOException {
+    public boolean registrationUser(String login, String password, String email) throws UserDAOException {
         try(Connection connection = AcademConnector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_USER)) {
             preparedStatement.setString(1, login);

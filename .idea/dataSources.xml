@@ -7,5 +7,14 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5433/academ</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="students@localhost" uuid="85c09eeb-beb7-4dbd-88a6-0fc709013688">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/students</jdbc-url>
+      <driver-properties>
+        <property name="postgres" value="password" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>

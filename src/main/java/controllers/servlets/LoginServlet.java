@@ -1,14 +1,14 @@
-package controllers;
+package controllers.servlets;
 
 import common.exceptions.UserDAOException;
-import models.connector.AcademConnector;
 import models.pojo.User;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import org.apache.log4j.xml.DOMConfigurator;
-import org.w3c.dom.DOMConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import services.UserService;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,12 +18,26 @@ import java.io.IOException;
 /**
  * Created by smoldyrev on 23.02.17.
  */
+//@WebServlet("/login")
+@Controller
 public class LoginServlet extends HttpServlet {
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    private UserService userService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+    }
 
     private static Logger logger = Logger.getLogger(LoginServlet.class);
     static {
 //        PropertyConfigurator.configure("src/main/resources/log4j.xml");
-        DOMConfigurator.configure("log4j.xml");
+       // DOMConfigurator.configure("log4j.xml");
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,7 +51,7 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         try {
-            User user =UserService.authorise(login,password);
+            User user = userService.authorise(login,password);
             if (user.getId()!=0) {
                 req.getSession().setAttribute("id",user.getId());
                 logger.trace("auth");

@@ -5,6 +5,8 @@ import models.connector.AcademConnector;
 import models.pojo.Student;
 import models.pojo.User;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,27 +15,28 @@ import java.util.List;
 /**
  * Created by bot on 23.02.17.
  */
+@Repository
 public class StudentDao {
 
-    private static Logger logger = Logger.getLogger(StudentDao.class);
+    private Logger logger = Logger.getLogger(StudentDao.class);
 
-    private static String SQL_ALL_STUDENTS = "SELECT * FROM \"Main\".\"Student\"";
+    private String SQL_ALL_STUDENTS = "SELECT * FROM \"Main\".\"Student\"";
 
-    private static String SQL_STUDENTS_GROUP = "SELECT * FROM \"Main\".\"Student\" WHERE id_group = ?";
+    private String SQL_STUDENTS_GROUP = "SELECT * FROM \"Main\".\"Student\" WHERE id_group = ?";
 
-    private static String SQL_FIND_STUDENT = "SELECT * FROM \"Main\".\"Student\" WHERE id =?";
+    private String SQL_FIND_STUDENT = "SELECT * FROM \"Main\".\"Student\" WHERE id =?";
 
-    private static String SQL_DELETE_STUDENT = "DELETE FROM \"Main\".\"Student\" WHERE id = ?";
+    private String SQL_DELETE_STUDENT = "DELETE FROM \"Main\".\"Student\" WHERE id = ?";
 
-    private static String SQL_UPDATE_STUDENT = "UPDATE \"Main\".\"Student\"\n" +
+    private String SQL_UPDATE_STUDENT = "UPDATE \"Main\".\"Student\"\n" +
             "\tSET id=?, name=?, birthdate=?, sex=?, id_group=?, email = ?" +
             "\tWHERE id=?";
 
-    private static String SQL_INSERT_STUDENT = "INSERT INTO \"Main\".\"Student\"(\n" +
+    private String SQL_INSERT_STUDENT = "INSERT INTO \"Main\".\"Student\"(\n" +
             "\t name, birthdate, sex, id_group, email)\n" +
             "\tVALUES (?, ?, ?, ?,?);";
 
-    public static List<Student> getAllStudents(){
+    public List<Student> getAllStudents(){
         List<Student> studentsList = new ArrayList<>();
         try(Connection connection = AcademConnector.getConnection()){
             Statement statement = connection.createStatement();
@@ -58,7 +61,7 @@ public class StudentDao {
         return studentsList;
     }
 
-    public static int deleteStudent(int id) {
+    public int deleteStudent(int id) {
         int count = 0;
         try(Connection connection = AcademConnector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_STUDENT)) {
@@ -72,7 +75,7 @@ public class StudentDao {
         return count;
     }
 
-    public static int updateStudent(Student student){
+    public int updateStudent(Student student){
 
         int count = 0;
         try(Connection connection = AcademConnector.getConnection();
@@ -93,7 +96,7 @@ public class StudentDao {
         return count;
     }
 
-    public static int insertStudent(Student student){
+    public int insertStudent(Student student){
 
         int count = 0;
         try(Connection connection = AcademConnector.getConnection();
@@ -112,7 +115,7 @@ public class StudentDao {
         return count;
     }
 
-    public static Student getStudentById(int id) throws UserDAOException {
+    public Student getStudentById(int id) throws UserDAOException {
 
         logger.debug(id);
         Student student = null;
@@ -139,7 +142,7 @@ public class StudentDao {
         return student;
     }
 
-    public static List<Student> getStudentsByGroup(int groupid){
+    public List<Student> getStudentsByGroup(int groupid){
         List<Student> studentsList = new ArrayList<>();
         try(Connection connection = AcademConnector.getConnection()){
             PreparedStatement preparedStatement= connection.prepareStatement(SQL_STUDENTS_GROUP);

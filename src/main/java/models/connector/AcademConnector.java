@@ -33,7 +33,7 @@ public class AcademConnector {
         try {
             if (connection!=null) connection.close();
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://localhost:5433/academ";
+            String url = "jdbc:postgresql://localhost:5432/students";
             connection = DriverManager.getConnection(url, "postgres", "123456");
 
             logger.trace("Successful connect to base: "+url);
