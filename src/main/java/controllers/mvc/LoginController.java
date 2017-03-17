@@ -1,6 +1,7 @@
 package controllers.mvc;
 
 import common.exceptions.UserDAOException;
+import models.pojo.Student;
 import models.pojo.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

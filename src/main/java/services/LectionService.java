@@ -5,6 +5,7 @@ import models.dao.StudentDao;
 import models.pojo.Lection;
 import models.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,7 @@ public class LectionService {
         return lectionDAO.insertLection(lection);
     }
 
+    @Secured("ROLE_ADMIN")
     public  List<Lection> getNearedLection() {
         return lectionDAO.getNearedLections();
     }

@@ -3,6 +3,7 @@ package services;
 import models.dao.StudentDao;
 import models.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class StudentService {
         this.studentDao = studentDao;
     }
 
+    @Secured("ROLE_ADMIN")
     public List<Student> getAllStudents(){
         return studentDao.getAllStudents();
     }

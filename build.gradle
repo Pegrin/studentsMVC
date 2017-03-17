@@ -20,4 +20,9 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-context', version: '4.3.5.RELEASE'
     compile group: 'org.springframework', name: 'spring-web', version: '4.3.5.RELEASE'
     compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.5.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '4.2.2.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.2.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '4.3.5.RELEASE'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.8.Final'
 }

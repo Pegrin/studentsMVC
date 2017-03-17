@@ -1,14 +1,34 @@
 package models.pojo;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
 /**
  * Created by smoldyrev on 23.02.17.
  */
-public class User {
+@Entity
+@Table(name = "users", schema = "\"Main\"", catalog = "students")
+public class User implements Serializable {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private int id;
+
+    @Basic
+    @Column(name = "login")
     private String login;
+
+    @Basic
+    @Column(name = "password")
     private String password;
+
+    @Basic
+    @Column(name = "role")
     private String role;
+
+    @Basic
+    @Column(name = "email")
     private String email;
 
     public User(int id, String login, String password, String role, String email) {
